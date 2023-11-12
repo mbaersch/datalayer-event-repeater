@@ -35,7 +35,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "SIMPLE_TABLE",
     "name": "eventTable",
-    "displayName": "Repeat all of the following events...",
+    "displayName": "Repeat all occurrences of the following events",
     "simpleTableColumns": [
       {
         "defaultValue": "",
@@ -50,59 +50,100 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "NON_EMPTY"
       }
-    ]
+    ],
+    "alwaysInSummary": true
   },
   {
-    "type": "TEXT",
-    "name": "markerEvent",
-    "displayName": "... until this event is found",
-    "simpleValueType": true
-  },
-  {
-    "type": "CHECKBOX",
-    "name": "addConditions",
-    "checkboxText": "Add conditions (optonal)",
-    "simpleValueType": true,
-    "valueValidators": [
+    "type": "SELECT",
+    "name": "stopCondition",
+    "displayName": "Stop condition",
+    "macrosInSelect": false,
+    "selectItems": [
       {
-        "type": "NON_EMPTY"
-      }
-    ]
-  },
-  {
-    "type": "PARAM_TABLE",
-    "name": "additionalChecks",
-    "displayName": "Add one or multiple \"key equals value\" conditions (all must be met). Example: \"trackingConsent equals true\" . Key must be part of dataLayer object with specified event name.",
-    "paramTableColumns": [
-      {
-        "param": {
-          "type": "TEXT",
-          "name": "checkField",
-          "displayName": "Key Name",
-          "simpleValueType": true,
-          "help": "Enter name of a key that has to be present in the event push that is used as condition",
-          "valueValidators": [
-            {
-              "type": "NON_EMPTY"
-            }
-          ]
-        },
-        "isUnique": true
+        "value": "none",
+        "displayValue": "None"
       },
       {
-        "param": {
-          "type": "TEXT",
-          "name": "checkValue",
-          "displayName": "Value",
-          "simpleValueType": true
-        },
-        "isUnique": false
+        "value": "event",
+        "displayValue": "Specific event"
+      }
+    ],
+    "simpleValueType": true,
+    "help": "\"None\" processes a copy of all existing dataLayer events when triggered",
+    "defaultValue": "none",
+    "alwaysInSummary": true
+  },
+  {
+    "type": "GROUP",
+    "name": "stopEventSettings",
+    "displayName": "Stop marker event definition",
+    "groupStyle": "NO_ZIPPY",
+    "subParams": [
+      {
+        "type": "TEXT",
+        "name": "markerEvent",
+        "displayName": "Stop when this event is found",
+        "simpleValueType": true,
+        "valueValidators": [
+          {
+            "type": "NON_EMPTY"
+          }
+        ]
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "addConditions",
+        "checkboxText": "Add conditions (optonal)",
+        "simpleValueType": true,
+        "valueValidators": [
+          {
+            "type": "NON_EMPTY"
+          }
+        ]
+      },
+      {
+        "type": "PARAM_TABLE",
+        "name": "additionalChecks",
+        "displayName": "Add one or multiple \"key equals value\" conditions (all must be met). Example: \"trackingConsent equals true\" . Key must be part of dataLayer object with specified event name.",
+        "paramTableColumns": [
+          {
+            "param": {
+              "type": "TEXT",
+              "name": "checkField",
+              "displayName": "Key Name",
+              "simpleValueType": true,
+              "help": "Enter name of a key that has to be present in the event push that is used as condition",
+              "valueValidators": [
+                {
+                  "type": "NON_EMPTY"
+                }
+              ]
+            },
+            "isUnique": true
+          },
+          {
+            "param": {
+              "type": "TEXT",
+              "name": "checkValue",
+              "displayName": "Value",
+              "simpleValueType": true
+            },
+            "isUnique": false
+          }
+        ],
+        "enablingConditions": [
+          {
+            "paramName": "addConditions",
+            "paramValue": true,
+            "type": "EQUALS"
+          }
+        ]
       }
     ],
     "enablingConditions": [
       {
-        "paramName": "addConditions",
-        "paramValue": true,
+        "paramName": "stopCondition",
+        "paramValue": "event",
         "type": "EQUALS"
       }
     ]
@@ -110,8 +151,8 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "GROUP",
     "name": "advSettings",
-    "displayName": "Advanced settings",
-    "groupStyle": "NO_ZIPPY",
+    "displayName": "Additional settings",
+    "groupStyle": "ZIPPY_OPEN_ON_PARAM",
     "subParams": [
       {
         "type": "CHECKBOX",
@@ -154,18 +195,23 @@ var currentDataLayer = copyFromWindow("dataLayer");
 const mrkKey = data.markerEvent;
 
 for (var i = 0; i < currentDataLayer.length; i++){
+
   var el = currentDataLayer[i];
+  
   if (el && el.event) {
-    //reached marker event? 
-    if (el.event === mrkKey) {
-      var doBreak = true;
-      //conditions met?
-      if (data.addConditions === true) {
-        data.additionalChecks.forEach((item) => {
-          doBreak = doBreak && (makeString(el[item.checkField])  == makeString(item.checkValue)); 
-        });      
+    
+    if (data.stopCondition != "none") {
+      //reached marker event? 
+      if (el.event === mrkKey) {
+        var doBreak = true;
+        //conditions met?
+        if ((data.addConditions === true) && data.additionalChecks) {
+          data.additionalChecks.forEach((item) => {
+            doBreak = doBreak && (makeString(el[item.checkField])  == makeString(item.checkValue)); 
+          });      
+        }
+        if (doBreak === true) break;  
       }
-      if (doBreak === true) break;  
     }
   
     //repeat current dataLayer event?
@@ -265,3 +311,4 @@ scenarios: []
 ___NOTES___
 
 Created on 12.11.2023, 11:42:53
+
