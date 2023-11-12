@@ -12,7 +12,7 @@ This template is meant to help with early dataLayer pushes for ecommerce trackin
 
 Trigger groups are the usual way to "pull event up the dataLayer" once a consent manager is loaded and communicates the current consent conditions via dataLayer events and / or variables. 
 
-Use this tag template to repeat all events that occured before a certain (consent) condition was met. 
+Use this tag template to repeat all events that occured before a certain (consent) condition was met if you want to avoid  trigger groups in your setup. 
 
 ## What it does
 This tag template can be used to re-push events with specific `event` keys. When fired, the tag gets a copy of the current dataLayer and compares every `event` value for every push with all event names specified in the list, starting with the first event that occured in the dataLayer. 
@@ -40,5 +40,5 @@ You can optionally define a key name that has to be part of the copied dataLayer
 
 **Note**: If the "stop marker" cannot be found, all events will be processed that were already present in the dataLayer at the moment of tag execution. Which would be the same result like picking *None* as *Stop condition* (which is default). 
 
-**Important***
+**Important**
 Note that this tag should be set to triggered **"once per page"** if your setup might repeat an event that is used to trigger this tag, resulting in an endless loop or events! 
