@@ -4,7 +4,7 @@
 
 Climbs up the dataLayer to a specific event and repeats all events that match a list of event keys.
 
-![Template Status](https://img.shields.io/badge/Community%20Template%20Gallery%20Status-In%20development-blue) ![Repo Size](https://img.shields.io/github/repo-size/mbaersch/datalayer-event-repeater) ![License](https://img.shields.io/github/license/mbaersch/datalayer-event-repeater)
+![Template Status](https://img.shields.io/badge/Community%20Template%20Gallery%20Status-Submitted-orange) ![Repo Size](https://img.shields.io/github/repo-size/mbaersch/datalayer-event-repeater) ![License](https://img.shields.io/github/license/mbaersch/datalayer-event-repeater)
 
 ---
 
