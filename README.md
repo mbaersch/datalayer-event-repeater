@@ -17,6 +17,13 @@ Use this tag template to repeat all events that occured before a certain (consen
 ## What it does
 This tag template can be used to re-push events with specific `event` keys. When fired, the tag gets a copy of the current dataLayer and compares every `event` value for every push with all event names specified in the list, starting with the first event that occured in the dataLayer. 
 
+## Example
+A product detail page pushes a `view_item` event (7) before `consent_status` (10) occurs. It triggers no tags because there is no (known) consent available from dataLayer variables used to block tags without consent. 
+
+![example dataLayer in Tag Assistant](https://github.com/mbaersch/datalayer-event-repeater/blob/main/res/example.png)
+
+At `consent_status` (10), a *Data Layer Request Repeater* tag is fired that repeats all ecommerce events. Now that consent variables are populated correctly, a GA4 event tag and TikTok Pixel are fired when the repeated `view_item` event (13) enters the dataLayer again. 
+
 ## Usage
 
 ### Define events to repeat
