@@ -28,8 +28,7 @@ If event names match, the former event...
 - optionally gets an additional key `repeater.isRepeatedEvent` with value of `true` 
 - gets pushed to the dataLayer again  
 
-**Clear ecommerce**
-If a repeated dataLayer object has an `ecommerce` key, it can be reset before the event gets pushed to the dataLayer again. This is recommended in order to jave a clean `ecommerce` dataLayer when tags fire.  
+**Clear ecommerce**: If a repeated dataLayer object has an `ecommerce` key, it can be reset before the event gets pushed to the dataLayer again. This is recommended in order to jave a clean `ecommerce` dataLayer when tags fire.  
 
 By default, all events that exist in the dataLayer at the time of triggering this tag are re-processed if they match one of the defined event names. If events with the same name are present more than once, all occurrences will be repeated by this tag. 
 
@@ -40,5 +39,4 @@ You can optionally define a key name that has to be part of the copied dataLayer
 
 **Note**: If the "stop marker" cannot be found, all events will be processed that were already present in the dataLayer at the moment of tag execution. Which would be the same result like picking *None* as *Stop condition* (which is default). 
 
-**Important**
-Note that this tag should be set to triggered **"once per page"** if your setup might repeat an event that is used to trigger this tag, resulting in an endless loop or events! 
+**Important**: Note that this tag should be set to triggered **"once per page"** if your setup might repeat an event that is used to trigger this tag, resulting in an endless loop or events! 
