@@ -12,7 +12,7 @@ This template is meant to help with early dataLayer pushes for ecommerce trackin
 
 Trigger groups are the usual way to "pull event up the dataLayer" once a consent manager is loaded and communicates the current consent conditions via dataLayer events and / or variables. 
 
-Use this tag template to repeat all events that occured before a certain (consent) condition was met if you want to avoid  trigger groups in your setup. 
+Use this tag template to repeat all events that occured before a certain (consent) condition was met if you want to avoid  trigger groups in your set-up. 
 
 ## What it does
 This tag template can be used to re-push events with specific `event` keys. When fired, the tag gets a copy of the current dataLayer and compares every `event` value for every push with all event names specified in the list, starting with the first event that occured in the dataLayer. 
@@ -46,4 +46,32 @@ You can optionally define a key name that has to be part of the copied dataLayer
 
 **Note**: If the "stop marker" cannot be found, all events will be processed that were already present in the dataLayer at the moment of tag execution. Which would be the same result like picking *None* as *Stop condition* (which is default). 
 
-**Important**: Note that this tag should be set to triggered **"once per page"** if your setup might repeat an event that is used to trigger this tag, resulting in an endless loop or events! 
+## Triggering
+Usually, a trigger that fires on all pages whenever consent state is available or was changed will be the right choice. 
+
+When events that trigger this tag can occur multiple times (like a change of consent settings by a user), this tag should be triggered **"once per page"**. 
+
+### Options
+Depending on your set-up (GTM loads consent tool, consent loads GTM, or both are part of the code) you should consider the following:
+
+- if your website is a single page app (SPA) using this tag might lead to wrong data in your systems, caused by "older" events that happened on a different URL or rely on other data that has  changed in the meantime
+
+- if your *Data Layer Request Repeater*  tag set-up might repeat events that are used to trigger this tag again, you can end up in an endless loop of events! 
+
+- it can lead to a more robust container set-up when all tags that fire on potentially repeated dataLayer pushes are set to fire *once per page*, too. This might not be appropriate in every situation (especially on SPAs) 
+
+### Testing
+Before publishing, create and test several pages with consent- and ecommerce events in different order: 
+
+- try a page with events that have to be repeated in order to work because they occur before a consent trigger event (can be hard coded for testing). To do this on an e-commerce site, try this tag on a product detail page with a `view_item` that occurs early in the dataLayer like demonstrated in the example above.  
+
+- create a page with opposite order of consent- and e-commerce events in the dataLayer. Use this page to test if your triggers really work and no unnecessary events are repeated
+
+- visit and test a page wurh multiple events that should be repeated (e.g. `view_item_list`)
+
+Make sure that not only tags are fired but also include **correct data** by looking at parameters from outgoing requests in the browser or using GTM preview!
+
+Test all cases with... 
+
+* existing consent and then 
+* repeat with missing consent that is granted afterwards by changing consent settings    
