@@ -1,0 +1,6 @@
+homepage: "https://www.markus-baersch.de"
+documentation: "https://github.com/mbaersch/datalayer-event-repeater#readme"
+versions:
+  # Latest version
+  - sha: xxxxx
+    changeNotes: Initial release.
