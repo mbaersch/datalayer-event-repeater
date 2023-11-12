@@ -22,7 +22,7 @@ A product detail page pushes a `view_item` event (7) before `consent_status` (10
 
 ![example dataLayer in Tag Assistant](https://github.com/mbaersch/datalayer-event-repeater/blob/main/res/example.png)
 
-At `consent_status` (10), a *Data Layer Request Repeater* tag is fired that repeats all ecommerce events. Now that consent variables are populated correctly, a GA4 event tag and TikTok Pixel are fired when the repeated `view_item` event (13) enters the dataLayer again. 
+At `consent_status` (10), a *Data Layer Request Repeater* tag is fired that repeats all ecommerce events. Now that consent variables are populated correctly, a GA4 event tag and TikTok Pixel are fired when the repeated `view_item` event (13) enters the dataLayer again. The *Message* (12) right before the new `view_item` contains a `ecommerce:null` reset push as defined in the tag´s options (see description).   
 
 ## Usage
 
