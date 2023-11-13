@@ -37,9 +37,14 @@ If event names match, the former event...
 
 **Clear ecommerce**: If a repeated dataLayer object has an `ecommerce` key, it can be reset before the event gets pushed to the dataLayer again. This is recommended in order to jave a clean `ecommerce` dataLayer when tags fire.  
 
-By default, all events that exist in the dataLayer at the time of triggering this tag are re-processed if they match one of the defined event names. If events with the same name are present more than once, all occurrences will be repeated by this tag. 
+### Partial match and RegEx
+Instead of defining every event to repeat by entering it´s full name in a list entry, you can use partial match and regular expressions to cover several events with one entry.      
+
+When this option in *Advanced settings* is active, the tag uses a JavaScript "match" (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match) to determine what events to repeat. If not, an event name must be equal to an entry on the list to be handled by the tag. If you activate this option and want to make sure that certain event names only trigger when a full match for "examle_event" is found, use `^example_event$`.  
 
 ### Optional "stop marker" event 
+By default, all events that exist in the dataLayer at the time of triggering this tag are re-processed if they match one of the defined event names. If events with the same name are present more than once, all occurrences will be repeated by this tag.
+
 Limit this process by defining a specific event name if neccessary. When this event is found in the copy of previous dataLayer events, the tag stops processing all following events. 
 
 You can optionally define a key name that has to be part of the copied dataLayer push and needs to contain a specific value. Using this, a "stop marker" event can occur several times and will be ignored until the desired key and value are set with this event (a specific consent information for example). 

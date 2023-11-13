@@ -177,6 +177,13 @@ ___TEMPLATE_PARAMETERS___
         "simpleValueType": true,
         "help": "Adds a \"repeater.isRepeatedEvent\" key with value \"true\" to every handled event",
         "defaultValue": false
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "useRegex",
+        "checkboxText": "Allow Partial Match And RegEx",
+        "simpleValueType": true,
+        "help": "Check to use partial match (\"view_\" would catch \"view_item\" and \"view_item_list\" as well as \"pageview_something\") or regular expressions in your list. If not active, event names must match a list entry (case-sensitive)."
       }
     ]
   }
@@ -216,7 +223,8 @@ for (var i = 0; i < currentDataLayer.length; i++){
   
     //repeat current dataLayer event?
     data.eventTable.forEach((rpekey) => {
-      if (el.event === rpekey.eventName) {
+      var doThis =  data.useRegex ? el.event.match(rpekey.eventName) != null : el.event === rpekey.eventName;
+      if (doThis === true) {
         if (data.resetEventId === true) {
           el["repeater.originalEventId"] = el["gtm.uniqueEventId"];
           el["gtm.uniqueEventId"] = undefined;
@@ -311,4 +319,5 @@ scenarios: []
 ___NOTES___
 
 Created on 12.11.2023, 11:42:53
+
 
