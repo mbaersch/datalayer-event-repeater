@@ -6,6 +6,9 @@ Climbs up the dataLayer to a specific event and repeats all events that match a 
 
 ![Template Status](https://img.shields.io/badge/Community%20Template%20Gallery%20Status-Submitted-orange) ![Repo Size](https://img.shields.io/github/repo-size/mbaersch/datalayer-event-repeater) ![License](https://img.shields.io/github/license/mbaersch/datalayer-event-repeater)
 
+**Installing the template**
+As long as this template can not be installed using the Template Gallery, you can manually import the `template.tpl` file from this repository. After adding a new template in the *Templates -> Tag Templates* section (*New* button), select *Import* from the dot menu in the opper right corner of the *Templae Editor* and hit *Save*.   
+
 ---
 
 This template is meant to help with early dataLayer pushes for ecommerce tracking and other events that may not be processed until a consent manager adds the current consent state to the dataLayer. Usually a site initializes a dataLayer with ecommerce events that occur when a page is loaded. Product detail views, checkout event, purchases and other pushes might me too far down the dataLayer to be used to fire certain tags that need consent. 
