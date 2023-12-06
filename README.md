@@ -1,6 +1,6 @@
 # DataLayer Event Repeater 
 
-**Custom Variable Template for Google Tag Manager**
+**Custom Tag Template for Google Tag Manager**
 
 Climbs up the dataLayer to a specific event and repeats all events that match a list of event keys.
 
