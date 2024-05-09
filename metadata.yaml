@@ -2,5 +2,5 @@ homepage: "https://www.markus-baersch.de"
 documentation: "https://github.com/mbaersch/datalayer-event-repeater#readme"
 versions:
   # Latest version
-  - sha: 29b974ceb189f36f6ae5a66ef102542096b158d3
+  - sha: 80e887588b68d9f354e4eb40cbcb78db6bff0750
     changeNotes: Initial release.
