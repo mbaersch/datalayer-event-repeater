@@ -312,7 +312,7 @@ function processEvent(i) {
           el.randomEventId = getTimestampMillis() + "." + generateRandom(1000000000, 9999999999) + "." + el.event;
         }  
         if (data.addNameSuffix === true) {
-          el.event = el.event + data.addNameSuffix||".unique";
+          el.event = el.event + data.nameSuffix||".unique";
         }  
         if (data.addRepushMarker === true) {
           el['repeater.isRepeatedEvent'] = true;
