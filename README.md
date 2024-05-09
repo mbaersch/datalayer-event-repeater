@@ -16,6 +16,9 @@ As long as this template can not be installed using the Template Gallery, you ca
 *2024-04-25*
 - added options for "Direction" (up or down the dataLayer) and "Frequency" (only once or every match) to have more control when used in a single page application 
 
+*2024-05-10*
+- new options for adding a suffix to every repeated event name and a random event id in a `randomEventId` key (e.g. for deduplication)  
+
 ## Description
 This template is meant to help with early dataLayer pushes for ecommerce tracking and other events that may not be processed until a consent manager adds the current consent state to the dataLayer. Usually a site initializes a dataLayer with ecommerce events that occur when a page is loaded. Product detail views, checkout event, purchases and other pushes might me too far down the dataLayer to be used to fire certain tags that need consent. 
 
@@ -61,6 +64,8 @@ If event names match, the former event...
 
 - is (optionally) changed so that the existing `gtm.uniqueEventId` is not published again (GTM will add a new id). The old id will be preseved as `repeater.originalEventId`. Note: if you deactivate this option, you will not be able to see repeated events in Google Tag Assistant!
 - optionally gets an additional key `repeater.isRepeatedEvent` with value of `true` 
+- optionally gets another additional key `randomEventId` with a dot-separated timestamp and random integer 
+- may have an altered event name with an added user-defined suffix 
 - gets pushed to the dataLayer again  
 
 **Clear ecommerce**: If a repeated dataLayer object has an `ecommerce` key, it can be reset before the event gets pushed to the dataLayer again. This is recommended in order to jave a clean `ecommerce` dataLayer when tags fire.  
@@ -80,7 +85,7 @@ Depending on your set-up (GTM loads consent tool, consent loads GTM, or both are
 
 - if your website is a single page app (SPA) using this tag might lead to wrong data in your systems, caused by "older" events that happened on a different URL or rely on other data that has  changed in the meantime
 
-- if your *Data Layer Request Repeater*  tag set-up might repeat events that are used to trigger this tag again, you can end up in an endless loop of events! 
+- if your *Data Layer Request Repeater* tag set-up might repeat events that are used to trigger this tag again, you can end up in an endless loop of events! 
 
 - it can lead to a more robust container set-up when all tags that fire on potentially repeated dataLayer pushes are set to fire *once per page*, too. This might not be appropriate in every situation (especially on SPAs) 
 

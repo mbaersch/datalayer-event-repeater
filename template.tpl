@@ -224,6 +224,39 @@ ___TEMPLATE_PARAMETERS___
         "checkboxText": "Allow Partial Match And RegEx",
         "simpleValueType": true,
         "help": "Check to use partial match (\"view_\" would catch \"view_item\" and \"view_item_list\" as well as \"pageview_something\") or regular expressions in your list. If not active, event names must match a list entry (case-sensitive)."
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "addRandomId",
+        "checkboxText": "Add random id",
+        "simpleValueType": true,
+        "help": "Check this option to add a \"randomEventId\" key to every repeated event with a timestamp and a random number"
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "addNameSuffix",
+        "checkboxText": "Add text to event name",
+        "simpleValueType": true,
+        "help": "All repeated events can optionally have a suffix added to the event name"
+      },
+      {
+        "type": "TEXT",
+        "name": "nameSuffix",
+        "displayName": "Event name suffix",
+        "simpleValueType": true,
+        "valueValidators": [
+          {
+            "type": "NON_EMPTY"
+          }
+        ],
+        "defaultValue": ".repeated",
+        "enablingConditions": [
+          {
+            "paramName": "addNameSuffix",
+            "paramValue": true,
+            "type": "EQUALS"
+          }
+        ]
       }
     ]
   }
@@ -236,6 +269,9 @@ const copyFromWindow = require('copyFromWindow');
 const createQueue = require('createQueue');
 //const log = require('logToConsole');
 const makeString = require('makeString');
+const generateRandom = require("generateRandom");
+const getTimestampMillis = require("getTimestampMillis");
+
     
 const dataLayerPush = createQueue('dataLayer');
 var currentDataLayer = copyFromWindow("dataLayer");  
@@ -271,6 +307,12 @@ function processEvent(i) {
         if (data.resetEventId === true) {
           el["repeater.originalEventId"] = el["gtm.uniqueEventId"];
           el["gtm.uniqueEventId"] = undefined;
+        }  
+        if (data.addNameSuffix === true) {
+          el.event = el.event + data.addNameSuffix||".unique";
+        }  
+        if (data.addRandomId === true) {
+          el.randomEventId = getTimestampMillis() + "." + generateRandom(1000000000, 9999999999);
         }  
         if (data.addRepushMarker === true) {
           el['repeater.isRepeatedEvent'] = true;
