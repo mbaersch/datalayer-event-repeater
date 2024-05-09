@@ -308,11 +308,11 @@ function processEvent(i) {
           el["repeater.originalEventId"] = el["gtm.uniqueEventId"];
           el["gtm.uniqueEventId"] = undefined;
         }  
+        if (data.addRandomId === true) {
+          el.randomEventId = getTimestampMillis() + "." + generateRandom(1000000000, 9999999999) + "." + el.event;
+        }  
         if (data.addNameSuffix === true) {
           el.event = el.event + data.addNameSuffix||".unique";
-        }  
-        if (data.addRandomId === true) {
-          el.randomEventId = getTimestampMillis() + "." + generateRandom(1000000000, 9999999999);
         }  
         if (data.addRepushMarker === true) {
           el['repeater.isRepeatedEvent'] = true;

@@ -64,7 +64,7 @@ If event names match, the former event...
 
 - is (optionally) changed so that the existing `gtm.uniqueEventId` is not published again (GTM will add a new id). The old id will be preseved as `repeater.originalEventId`. Note: if you deactivate this option, you will not be able to see repeated events in Google Tag Assistant!
 - optionally gets an additional key `repeater.isRepeatedEvent` with value of `true` 
-- optionally gets another additional key `randomEventId` with a dot-separated timestamp and random integer 
+- optionally gets another additional key `randomEventId` with a dot-separated timestamp, a random integer, and the current event name 
 - may have an altered event name with an added user-defined suffix 
 - gets pushed to the dataLayer again  
 
