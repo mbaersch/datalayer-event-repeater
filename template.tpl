@@ -61,7 +61,7 @@ ___TEMPLATE_PARAMETERS___
     "selectItems": [
       {
         "value": "once",
-        "displayValue": "Once (only most recent event)"
+        "displayValue": "Once (only first matching event)"
       },
       {
         "value": "all",
