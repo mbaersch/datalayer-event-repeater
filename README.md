@@ -4,7 +4,8 @@
 
 Climbs up or down the dataLayer and repeats events that match a list of desired event keys. Optionally repeats only once and / or until a specific event is found.
 
-![Template Status](https://img.shields.io/badge/Community%20Template%20Gallery%20Status-Submitted-orange) ![Repo Size](https://img.shields.io/github/repo-size/mbaersch/datalayer-event-repeater) ![License](https://img.shields.io/github/license/mbaersch/datalayer-event-repeater)
+![Template Status](https://img.shields.io/badge/Community%20Template%20Gallery%20Status-published-green)](https://tagmanager.google.com/gallery/#/owners/mbaersch/templates/datalayer-event-repeater) ![Repo Size](https://img.shields.io/github/repo-size/mbaersch/datalayer-event-repeater) ![License](https://img.shields.io/github/license/mbaersch/datalayer-event-repeater)
+
 
 **Installing the template**
 
