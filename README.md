@@ -4,12 +4,11 @@
 
 Climbs up or down the dataLayer and repeats events that match a list of desired event keys. Optionally repeats only once and / or until a specific event is found.
 
-![Template Status](https://img.shields.io/badge/Community%20Template%20Gallery%20Status-published-green)](https://tagmanager.google.com/gallery/#/owners/mbaersch/templates/datalayer-event-repeater) ![Repo Size](https://img.shields.io/github/repo-size/mbaersch/datalayer-event-repeater) ![License](https://img.shields.io/github/license/mbaersch/datalayer-event-repeater)
-
+[![Template Status](https://img.shields.io/badge/Community%20Template%20Gallery%20Status-published-green)](https://tagmanager.google.com/gallery/#/owners/mbaersch/templates/datalayer-event-repeater) ![Repo Size](https://img.shields.io/github/repo-size/mbaersch/datalayer-event-repeater) ![License](https://img.shields.io/github/license/mbaersch/datalayer-event-repeater)
 
 **Installing the template**
 
-As long as this template can not be installed using the Template Gallery, you can manually import the `template.tpl` file from this repository. After adding a new template in the *Templates -> Tag Templates* section (*New* button), select *Import* from the dot menu in the opper right corner of the *Templae Editor* and hit *Save*.   
+Create a new tag in GTM and pick *"Discover more tag types in the Community Template Gallery"* when chosing a tag type. Search for *"DataLayer Event Repeater"* and add the new template to your workspace. You can now use it for a new tag.  
 
 ---
 
