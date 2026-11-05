@@ -19,6 +19,9 @@ Create a new tag in GTM and pick *"Discover more tag types in the Community Temp
 *2024-05-10*
 - new options for adding a suffix to every repeated event name and a random event id in a `randomEventId` key (e.g. for deduplication)  
 
+*2026-11-05*
+- fix: events that GTM has not processed yet (no `gtm.uniqueEventId`) are no longer repeated. When the trigger event (e.g. `consent_status`) was queued before GTM loaded, the tag also saw the pushes behind it and every one of them fired twice. Such events fire on their own and are skipped now  
+
 ## Description
 This template is meant to help with early dataLayer pushes for ecommerce tracking and other events that may not be processed until a consent manager adds the current consent state to the dataLayer. Usually a site initializes a dataLayer with ecommerce events that occur when a page is loaded. Product detail views, checkout event, purchases and other pushes might me too far down the dataLayer to be used to fire certain tags that need consent. 
 

@@ -282,7 +282,9 @@ function processEvent(i) {
   //returns "false" if stop condition is met
   var el = currentDataLayer[i];
   
-  if (el && el.event) {
+  //skip pushes GTM has not processed yet (no gtm.uniqueEventId) - they will fire on their own,
+  //repeating them would duplicate events queued before GTM loaded (e.g. early consent)
+  if (el && el.event && el["gtm.uniqueEventId"] !== undefined) {
     
     if (data.stopCondition != "none") {
       //reached marker event? 
